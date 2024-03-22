@@ -1,0 +1,94 @@
+###
+GET http://localhost:7007/api/hotels
+
+
+### Henter alle hoteller
+GET http://localhost:7007/api/hotels
+Authorization: Bearer ey $2a$10$f5639YJFj3niynXiX2vznOLGYZlGeL6KXJ8ZVbsXfRwZ9NKqzPFVS
+
+### Henter et specifikt hotel udfra id'et
+GET http://localhost:7007/api/hotels/21
+
+### Henter et specifikt hotel ud fra id'ets værelser
+GET http://localhost:7007/api/hotels/7/rooms
+
+### Indsætter et nyt hotel ind i databasen
+POST http://localhost:7007/api/hotels
+Content-Type: application/json
+
+{
+  "name": "name",
+  "address": "Test"
+}
+
+### Opdaterer et eksisterende hotels navn & adresse
+PUT http://localhost:7007/api/hotels/12
+Content-Type: application/json
+
+{
+  "name": "Bedste-hotel",
+  "address": "Kongevejen"
+}
+
+### Sletter et hotel ud fra et specifikt id
+DELETE http://localhost:7007/api/hotels/11
+
+### Henter alle værelser
+GET http://localhost:7007/api/rooms
+
+### Henter et specifikt værelse ud fra id'et
+GET http://localhost:7007/api/rooms/3
+
+### Indsætter et nyt rum ind i databasen med et hotel
+POST http://localhost:7007/api/rooms
+Content-Type: application/json
+
+{
+  "number": 30,
+  "price": 3000,
+  "hotel": {
+    "id": 16
+  }
+}
+
+### Opdatere et eksisterende rum ud fra id'et
+PUT http://localhost:7007/api/rooms/34
+Content-Type: application/json
+
+{
+  "number": 30,
+  "price": 4000
+}
+
+### Sletter et eksisterende rum ud fra id'et
+DELETE http://localhost:7007/api/rooms/27
+
+### Registrer en ny bruger
+POST http://localhost:7007/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "Test132",
+  "password": "1234"
+}
+
+### Logger ind med en bruger
+POST http://localhost:7007/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "Test132",
+  "password": "1234"
+}
+
+### Få adgang via Json Web Token
+GET http://localhost:7007/api/protected/user_demo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaG9tYXMgSGFydG1hbm4iLCJzdWIiOiJUZXN0MTIiLCJleHAiOjE3MTA4NDUxNTgsInJvbGVzIjoiLHVzZXIiLCJ1c2VybmFtZSI6IlRlc3QxMiJ9.XoTU1hYfUfn7Aptpvd5Lz3h5WHk7eJZz06PT3RK-qd8
+
+### Få adgang via Json Web Token
+GET http://localhost:7007/api/protected/admin_demo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaG9tYXMgSGFydG1hbm4iLCJzdWIiOiJBaG1hZFRlc3QiLCJleHAiOjE3MTA4NDMyNTUsInJvbGVzIjoiLGFkbWluIiwidXNlcm5hbWUiOiJBaG1hZFRlc3QifQ.auKgZmK3L6r90A6a0lWDrMsVD5EZzcGhKE8GhdHvteU
+
+### Få adgang via Json Web Token
+GET http://localhost:7007/api/hotels/1/rooms
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaG9tYXMgSGFydG1hbm4iLCJzdWIiOiJBaG1hZFRlc3QiLCJleHAiOjE3MTA4NDMyNTUsInJvbGVzIjoiLGFkbWluIiwidXNlcm5hbWUiOiJBaG1hZFRlc3QifQ.auKgZmK3L6r90A6a0lWDrMsVD5EZzcGhKE8GhdHvteU
