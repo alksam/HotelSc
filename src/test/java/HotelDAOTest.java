@@ -41,7 +41,7 @@ class HotelDAOTest {
         String address = "søborg";
 
         // When
-        Hotel hotelCreated = hotelDAO.create(new Hotel("mohammed", "søborg"));
+        Hotel hotelCreated = hotelDAO.create(new Hotel("mohammed", "søborg", Hotel.HotelType.BUDGET));
 
         // Then
         assertEquals(name, hotelCreated.getName());
@@ -56,7 +56,7 @@ class HotelDAOTest {
 
         // When
         try (EntityManager em = emf.createEntityManager()) {
-            Hotel newHotel = new Hotel("Test", "Test");
+            Hotel newHotel = new Hotel("Test", "Test", Hotel.HotelType.BUDGET);
             em.getTransaction().begin();
             em.persist(newHotel);
             em.getTransaction().commit();
@@ -72,7 +72,7 @@ class HotelDAOTest {
     @DisplayName("Get hotel by id")
     void test3() {
         // Given
-        Hotel newHotel = new Hotel("Test", "Test");
+        Hotel newHotel = new Hotel("Test", "Test", Hotel.HotelType.BUDGET);
         Hotel foundHotel;
 
         // When
@@ -99,7 +99,7 @@ class HotelDAOTest {
         Hotel foundHotel;
 
         try (EntityManager em = emf.createEntityManager()) {
-            Hotel newHotel = new Hotel("Test", "Test");
+            Hotel newHotel = new Hotel("Test", "Test", Hotel.HotelType.BUDGET);
             em.getTransaction().begin();
             em.persist(newHotel);
             em.getTransaction().commit();
@@ -129,7 +129,7 @@ class HotelDAOTest {
         Hotel foundHotel;
 
         try (EntityManager em = emf.createEntityManager()) {
-            Hotel newHotel = new Hotel("Test", "Test");
+            Hotel newHotel = new Hotel("Test", "Test",  Hotel.HotelType.BUDGET);
             em.getTransaction().begin();
             em.persist(newHotel);
             em.getTransaction().commit();

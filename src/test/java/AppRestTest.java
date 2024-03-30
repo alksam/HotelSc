@@ -15,6 +15,7 @@ import org.example.Route.Route;
 import org.example.dtos.HotelDTO;
 import org.example.dtos.RoomDTO;
 import org.junit.jupiter.api.*;
+import org.testcontainers.shaded.com.google.common.annotations.VisibleForTesting;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ class AppRestTest {
 
     private static EntityManagerFactory emf;
     private static ApplicationConfig app;
-    private static Integer port = 7070;
+    private static Integer port = 7007;
     private static String userToken;
     private static String userUsername;
     private static String adminToken;
@@ -40,17 +41,15 @@ class AppRestTest {
     @BeforeAll
     static void setUp() {
         RestAssured.baseURI = "http://localhost:7007/api";
+        emf = HibernateConfig.getEntityManagerFactoryConfig(false);
 
-        emf = HibernateConfig.getEntityManagerFactoryConfig(true);
-
-       App appi = new App();
 
         app = ApplicationConfig.getInstance();
         app.initiateServer()
                 .startServer(port)
                 .setExceptionHandlers()
                 .checkSecurityRoles()
-                .setRoute(appi.addRoutes());
+                .setRoute(App.addRoutes());
 
     }
 
@@ -65,14 +64,14 @@ class AppRestTest {
 
         //Lav objekter
 
-        Hotel hotel1 = new Hotel("Hotel A", "Lyngby vej");
-        Hotel hotel2 = new Hotel("Hotel B", "Roskilde vej");
+        Hotel hotel1 = new Hotel("Hotel A", "Lyngby vej",   Hotel.HotelType.BUDGET);
+        Hotel hotel2 = new Hotel("Hotel B", "Roskilde vej", Hotel.HotelType.LUXURY);
 
-        hotel1.addRoom(new Room(1, 500));
-        hotel1.addRoom(new Room(2, 800));
+        hotel1.addRoom(new Room(1, 500, Room.RoomType.SINGLE));
+        hotel1.addRoom(new Room(2, 800, Room.RoomType.DOUBLE));
 
-        hotel2.addRoom(new Room(1, 500));
-        hotel2.addRoom(new Room(2, 800));
+        hotel2.addRoom(new Room(1, 500, Room.RoomType.SINGLE));
+        hotel2.addRoom(new Room(2, 800, Room.RoomType.DOUBLE));
 
         UserDAO userDAO = UserDAO.getInstance(emf);
         Role role = new Role("admin");
@@ -214,7 +213,7 @@ class AppRestTest {
     @DisplayName("Posting a hotel to the database.")
     public void test2() {
 
-        Hotel postHotel = new Hotel("TestName", "TestAddress");
+        Hotel postHotel = new Hotel("TestName", "TestAddress", Hotel.HotelType.BUDGET);
 
         RestAssured
                 .given()

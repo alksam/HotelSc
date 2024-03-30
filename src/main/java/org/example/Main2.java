@@ -17,14 +17,16 @@ import org.example.exceptions.EntityNotFoundException;
 
 public class Main2 {
 
-    public static void main(String[] args)  {
+  public static void main(String[] args)
+
+  {
 
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig(false);
         EntityManager em = emf.createEntityManager();
         HotelDAO hotelDAO = HotelDAO.getInstance(emf);
         UserDAO userDAO = UserDAO.getInstance(emf);
         RoomDTO roomDTO = new RoomDTO();
-        HotelController hotelController = new HotelController();
+        HotelController hotelController = new HotelController(emf);
 
         em.getTransaction().begin();
 
@@ -35,30 +37,30 @@ public class Main2 {
         User user = new User("eee", "1234");
         Role adminRole = new Role("admin");
 
-        Hotel hotel1 = new Hotel("Hotel A", "Lyngby vej");
-        Hotel hotel2 = new Hotel("Hotel B", "Roskilde vej");
+        Hotel hotel1 = new Hotel("Hotel A", "Roskilde vej", Hotel.HotelType.BUDGET );
+        Hotel hotel2 = new Hotel("Hotel B", "Roskilde vej" , Hotel.HotelType.LUXURY);
 
 
 
 
-        hotel1.addRoom(new Room(1, 500));
-        hotel1.addRoom(new Room(2, 800));
+        hotel1.addRoom(new Room(1, 500, Room.RoomType.SINGLE));
+        hotel1.addRoom(new Room(2, 800, Room.RoomType.DOUBLE));
 
-        hotel2.addRoom(new Room(1, 500));
-        hotel2.addRoom(new Room(2, 800));
+        hotel2.addRoom(new Room(1, 500, Room.RoomType.SINGLE));
+        hotel2.addRoom(new Room(2, 800, Room.RoomType.DOUBLE));
 
-        hotelController.getAll(hotelDAO);
+       // hotelController.getAll(H);
         user.addHotel(hotel1);
         user1.addHotel(hotel2);
 
-        try {
-            User verifiedUser = userDAO.verifyUser("eee", "1234");
+        /*try {
+            User verifiedUser = userDAO.verifyUser("am", "1234");
             System.out.println(user.getUsername());
         } catch (EntityNotFoundException e) {
             e.printStackTrace();
-        }
+        }**/
 
-        hotelDAO.getById(1);
+        //hotelDAO.getById(1);
 
 
             hotelDAO.create(hotel1);

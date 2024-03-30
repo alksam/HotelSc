@@ -12,16 +12,25 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
 public class HotelDTO {
 
-    int id;
-    String name;
-    String address;
-     Set<Room> rooms;
+  private   int id;
+   private String name;
+   private String address;
+    private Set<String> rooms;
 
 
+    public HotelDTO(Hotel hotel) {
+        this.id = hotel.getId();
+        this.name = hotel.getName();
+        this.address = hotel.getAddress();
+       this.rooms = hotel.getRoomasStrings();
+    }
+    public HotelDTO( String name, String address, Set<String> rooms) {
 
-
+        this.name = name;
+        this.address = address;
+        this.rooms = rooms;
+    }
 }

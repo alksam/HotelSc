@@ -32,7 +32,9 @@ import java.util.stream.Collectors;
 public class securityController  implements IsecurityController{
 
 
-    public securityController(EntityManagerFactory emf) {
+    public securityController(EntityManagerFactory emf)
+    {
+
         this.userDAO = UserDAO.getInstance(emf);
     }
 

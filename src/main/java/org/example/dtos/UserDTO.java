@@ -10,7 +10,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @AllArgsConstructor
-@ToString
 public class UserDTO {
     private String username;
     private String password;

@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+
 public class TokenDTO {
 
     private  String token;

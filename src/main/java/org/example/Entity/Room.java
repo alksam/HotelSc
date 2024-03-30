@@ -15,7 +15,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Table(name = "room")
 @Entity
-@ToString
 @NamedQuery(name = "Room.findAll", query = "SELECT r FROM Room r")
 
 public class Room {
@@ -26,16 +25,28 @@ public class Room {
     int id;
     @Column(name = "number")
     int number;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    RoomType type;
     @Column(name = "price")
     double price;
-    @JsonIgnore
+   @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     Hotel hotel;
 
 
-    public Room(  int number, double price) {
+    public Room(  int number, double price, RoomType type) {
         this.number = number;
         this.price = price;
+        this.type = type;
+    }
+
+  //  public void setHotel(Hotel hotel) {
+   //     this.hotel = hotel;
+   // }
+
+    public enum RoomType {
+        SINGLE, DOUBLE,SUITE
     }
 }

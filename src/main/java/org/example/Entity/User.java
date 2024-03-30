@@ -19,6 +19,9 @@ import java.util.Set;
 @Table(name = "users")
 public class User {
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String username;
     private String password;
     @ManyToMany

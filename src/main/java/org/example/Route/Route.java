@@ -30,6 +30,7 @@ public class Route {
     private static HotelDAO hotelDAO;
 
     private static ObjectMapper jsonMapper = new ObjectMapper();
+    private static Javalin app;
 
 
 
@@ -43,7 +44,7 @@ public class Route {
         ApplicationConfig applicationConfig = ApplicationConfig.getInstance();
         applicationConfig
                 .initiateServer()
-                .startServer(port)
+                .startServer( port)
                 .setExceptionHandlers()
                 .checkSecurityRoles()
                 .setRoute(roomRoutes())

@@ -8,15 +8,14 @@ import org.example.Entity.Room;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @AllArgsConstructor
 @Builder
 public class RoomDTO {
 
-    int id;
-    int hotelId;
-    int number;
-    double price;
+   private int id;
+   private int hotelId;
+   private int number;
+   private double price;
 
 
     public RoomDTO(int hotelId, int number, double price) {

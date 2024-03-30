@@ -1,5 +1,6 @@
 package org.example.Route;
 
+import io.javalin.Javalin;
 import io.javalin.apibuilder.EndpointGroup;
 import jakarta.persistence.EntityManagerFactory;
 import org.example.Config.ApplicationConfig;
@@ -37,14 +38,14 @@ public class App {
     }
 
 
-    public static void main(String[] args) {
+  /* public static void main(String[] args) {
     ApplicationConfig app = ApplicationConfig.getInstance();
     app.initiateServer()
-            .startServer(7007)
+            .startServer()
             .setExceptionHandlers()
             .checkSecurityRoles()
             .setRoute(addRoutes());
-}
+}*/
 
 
 }

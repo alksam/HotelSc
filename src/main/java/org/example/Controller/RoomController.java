@@ -3,11 +3,17 @@ package org.example.Controller;
 
 import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
+import jakarta.persistence.EntityManagerFactory;
 import org.example.DAO.RoomDAO;
 import org.example.Entity.Room;
 import org.example.dtos.RoomDTO;
 
 public class RoomController {
+
+    public RoomController ( EntityManagerFactory emf ) {
+        this.dao = RoomDAO.getInstance(emf);
+    }
+    private RoomDAO dao;
 
     public static Handler create(RoomDAO dao) {
         return ctx -> {
